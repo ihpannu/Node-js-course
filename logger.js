@@ -1,11 +1,11 @@
+console.log(__filename);
+console.log(__dirname);
+
 var url = 'http://example.com/log';
 
 function log(message) {
-  //send the HTTP request
+  //send the HTTP request¯
   console.log('Hi ' + message);
 }
-// log(url);
-
+log('Harman');
 module.exports = log;
-// module.exports.log = log;
-// module.exports.endpoint = url;
