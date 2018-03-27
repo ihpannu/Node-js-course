@@ -2,4 +2,6 @@ function sayHello(name) {
   console.log(name);
 }
 // sayHello('Hi')
-console.log(window);
+
+var message = '';
+console.log(global.message);
