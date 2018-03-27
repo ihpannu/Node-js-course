@@ -6,5 +6,6 @@ function log(message) {
 }
 // log(url);
 
-module.exports.log = log;
+module.exports = log;
+// module.exports.log = log;
 // module.exports.endpoint = url;
