@@ -10,3 +10,11 @@ emitter.emit('messageLogged', {
   id: 1,
   url: 'http://'
 });
+
+emitter.on('logging', data => {
+  console.log('data', data);
+});
+emitter.emit('logging', {
+  data: 5,
+  name: 'Harman'
+});
