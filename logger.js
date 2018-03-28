@@ -3,15 +3,17 @@ const emitter = new EventEmitter();
 
 var url = 'http://example.com/log';
 
-function log(message) {
-  //send the HTTP request¯
-  console.log('Hi ' + message);
+class Logger extends EventEmitter {
+  log(message) {
+    //send the HTTP request¯
+    console.log(message);
 
-  // Raise an event
-  emitter.emit('messageLogged', {
-    id: 1,
-    url: 'http://'
-  });
+    // Raise an event
+    emitter.emit('messageLogged', {
+      id: 1,
+      url: 'http://'
+    });
+  }
 }
-log('Harman');
-module.exports = log;
+
+module.exports = Logger;
