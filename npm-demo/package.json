@@ -1,0 +1,11 @@
+{
+  "name": "npm-demo",
+  "version": "1.0.0",
+  "description": "To learn Node.JS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Harman Pannu",
+  "license": "ISC"
+}
