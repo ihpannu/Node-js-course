@@ -1,11 +1,12 @@
 const EventEmitter = require('events');
 
-const myEmitter = new EventEmitter();
+const emitter = new EventEmitter();
 
-// Register a listner
-myEmitter.on('messageLogged', arg => {
-  console.log('listner called', arg);
+emitter.on('messageLogged', arg => {
+  console.log('Listner Called', arg);
 });
-
 // Raise an event
-myEmitter.emit('messageLogged', 1, 'url');
+emitter.emit('messageLogged', {
+  id: 1,
+  url: 'http://'
+});
