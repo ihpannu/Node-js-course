@@ -1,17 +1,15 @@
 {
-  "name": "npm-demo",
+  "name": "node-app",
   "version": "1.0.0",
-  "description": "To learn Node.JS",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Harman Pannu",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "underscore": "^1.8.3"
-  },
-  "devDependencies": {
-    "jshint": "^2.9.5"
+    "harman-lib-test": "^1.1.0"
   }
 }
