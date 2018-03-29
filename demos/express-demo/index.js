@@ -7,11 +7,9 @@ app.get('/', (req, res) => {
 app.get('/api/courses', (req, res) => {
   res.send('This is course page');
 });
-app.get('/about', (req, res) => {
-  res.send('This is about page');
-});
-app.get('/blog', (req, res) => {
-  res.send('This is blog page');
+
+app.get('/api/courses/:year/:month', (req, res) => {
+  res.send(req.query);
 });
 
 const port = process.env.PORT || 3000;
