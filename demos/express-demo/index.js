@@ -66,3 +66,13 @@ function validateCourse(course) {
 }
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+app.delete('/api/courses/:id', (req, res) => {
+  const course = courses.find(c => c.id === parseInt(req.params.id));
+  if (!course) {
+    res.status(400).send('This is invalid ID');
+  }
+  const index = courses.indexOf(course);
+  courses.splice(index, 1);
+  res.send(course);
+});
