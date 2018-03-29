@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-app.use(express.json); // Adding a piece of middleware
+app.use(express.json()); // Adding a piece of middleware
 
 const courses = [
   { id: 1, name: 'course1' },
