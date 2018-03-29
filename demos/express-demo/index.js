@@ -17,9 +17,10 @@ app.get('/api/courses', (req, res) => {
 });
 
 app.post('/api/courses', (req, res) => {
-  const { error } = validateCourse(req.body);
+  const { error } = validateCourse(req.body); // object destructure
+
   if (error) {
-    res.status(400).send(result.error.details[0].message);
+    res.status(400).send(error.details[0].message);
     return;
   }
 
@@ -46,9 +47,8 @@ app.put('/api/courses/:id', (req, res) => {
   }
 
   const { error } = validateCourse(req.body); // object destructure
-
   if (error) {
-    res.status(400).send(result.error.details[0].message);
+    res.status(400).send(error.details[0].message);
     return;
   }
   course.name = req.body.name;
