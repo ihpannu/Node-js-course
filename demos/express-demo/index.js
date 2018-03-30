@@ -1,8 +1,22 @@
+const helmet = require('helmet');
+const morgan = require('morgan');
 const Joi = require('joi');
+const logger = require('./logger');
+const auth = require('./auth');
 const express = require('express');
 const app = express();
 
+const envProcess = process.env.NODE_ENV;
+console.log(`Node Env: ${envProcess}`);
+console.log(`app: ${app.get('env')}`);
+
 app.use(express.json()); // Adding a piece of middleware
+app.use(logger);
+app.use(auth);
+app.use(express.urlencoded({ extended: true })); // key=value&key=value
+app.use(express.static('public'));
+app.use(helmet());
+app.use(morgan('tiny'));
 // COURSES OBJECT TO USE
 const courses = [
   { id: 1, name: 'course1' },
@@ -68,7 +82,6 @@ app.delete('/api/courses/:id', (req, res) => {
 function validateCourse(course) {
   const schema = {
     name: Joi.string()
-      .alphanum()
       .min(3)
       .required()
   };
