@@ -1,0 +1,39 @@
+Arguments: 
+  /usr/local/bin/node /Users/code/.yarn/bin/yarn.js add express, joi
+
+PATH: 
+  /Users/code/.yarn/bin:/Users/code/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  8.10.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "vinteo",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "Harman Pannu",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Couldn't find package "express," on the "npm" registry.
+      at new MessageError (/Users/code/.yarn/lib/cli.js:186:110)
+      at NpmResolver.<anonymous> (/Users/code/.yarn/lib/cli.js:51625:15)
+      at Generator.next (<anonymous>)
+      at step (/Users/code/.yarn/lib/cli.js:98:30)
+      at /Users/code/.yarn/lib/cli.js:109:13
+      at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:188:7)

@@ -1,0 +1,11 @@
+{
+  "name": "vinteo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Harman Pannu",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3",
+    "joi": "^13.1.2"
+  }
+}
