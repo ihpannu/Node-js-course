@@ -17,5 +17,8 @@ function getUser(id, callback) {
 }
 
 function getRepositories(username) {
-  return ['repo1', 'repo2', 'repo3']
+  setTimeout(() => {
+    username(['repo1', 'repo2', 'repo3'])
+  }, 2000);
+
 }
