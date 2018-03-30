@@ -1,15 +1,12 @@
 const express = require('express');
 const router = express.Router();
+
 const genres = [
   { id: 1, name: 'Comedy' },
   { id: 2, name: 'Romantic' },
   { id: 3, name: 'Action' },
   { id: 4, name: 'Fantasy' }
 ];
-// Home Page
-router.get('/', (req, res) => {
-  res.send('Home Page');
-});
 
 // GET METHOD FOR ALL THE COURSES
 router.get('/api/genres', (req, res) => {
@@ -67,3 +64,5 @@ function validateGenre(genre) {
   };
   return Joi.validate(genre, schema);
 }
+
+module.exports = router;
