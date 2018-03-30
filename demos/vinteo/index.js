@@ -40,14 +40,28 @@ app.post('/api/genres', (req, res) => {
   res.send(genre);
 });
 
+// PUT METHOD
 app.put('/api/genres/:id', (req, res) => {
-  const { error } = validateGenre(res.body);
+  const genre = genres.find(genre => genre.id === parseInt(req.params.id));
+  if (!genre) return res.status(400).send('This is invalid ID ');
+
+  const { error } = validateGenre(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const genre = {
-    name: req.body.name
-  };
+  genre.name = req.body.name;
   res.send(genre);
+});
+
+// DELETE METHOD
+app.delete('/api/genres/:id', (req, res) => {
+  const genre = genres.find(genre => genre.id === parseInt(req.params.id));
+  if (!genre) return res.status(400).send('This is invalid ID ');
+
+  const { error } = validateGenre(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  genres.splice(genre, 1);
+  return res.send(genre);
 });
 
 // FUNCTION TO VALIDATE ENTRIES
