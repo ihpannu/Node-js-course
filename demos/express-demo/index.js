@@ -6,12 +6,14 @@ const logger = require('./logger');
 const auth = require('./auth');
 const express = require('express');
 const app = express();
+//DEBUG PACKAGE USAGE
+const debug = require('debug')('app:start');
 
 // MORGAN SETUP
 const envProcess = app.get('env');
 if (envProcess === 'development') {
   app.use(morgan('tiny'));
-  console.log('Morgan enabled...');
+  debug('Morgan enabled...');
 }
 
 app.use(express.json()); // Adding a piece of middleware
@@ -24,6 +26,7 @@ app.use(helmet());
 // CONFIGURATION
 console.log(`Application Name: ${config.get('name')} `);
 console.log(`Mail server: ${config.get('mail.host')} `);
+console.log(`Mail password: ${config.get('mail.password')} `);
 
 // COURSES OBJECT TO USE
 const courses = [
