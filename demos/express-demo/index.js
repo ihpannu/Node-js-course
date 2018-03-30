@@ -1,3 +1,4 @@
+const config = require('config');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const Joi = require('joi');
@@ -6,6 +7,7 @@ const auth = require('./auth');
 const express = require('express');
 const app = express();
 
+// MORGAN SETUP
 const envProcess = app.get('env');
 if (envProcess === 'development') {
   app.use(morgan('tiny'));
@@ -18,6 +20,10 @@ app.use(auth);
 app.use(express.urlencoded({ extended: true })); // key=value&key=value
 app.use(express.static('public'));
 app.use(helmet());
+
+// CONFIGURATION
+console.log(`Application Name: ${config.get('name')} `);
+console.log(`Mail server: ${config.get('mail.host')} `);
 
 // COURSES OBJECT TO USE
 const courses = [
