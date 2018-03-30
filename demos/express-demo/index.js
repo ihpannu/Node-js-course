@@ -6,9 +6,11 @@ const auth = require('./auth');
 const express = require('express');
 const app = express();
 
-const envProcess = process.env.NODE_ENV;
-console.log(`Node Env: ${envProcess}`);
-console.log(`app: ${app.get('env')}`);
+const envProcess = app.get('env');
+if (envProcess === 'development') {
+  app.use(morgan('tiny'));
+  console.log('Morgan enabled...');
+}
 
 app.use(express.json()); // Adding a piece of middleware
 app.use(logger);
@@ -16,7 +18,7 @@ app.use(auth);
 app.use(express.urlencoded({ extended: true })); // key=value&key=value
 app.use(express.static('public'));
 app.use(helmet());
-app.use(morgan('tiny'));
+
 // COURSES OBJECT TO USE
 const courses = [
   { id: 1, name: 'course1' },
