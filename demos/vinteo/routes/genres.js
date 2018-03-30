@@ -9,19 +9,19 @@ const genres = [
 ];
 
 // GET METHOD FOR ALL THE COURSES
-router.get('/api/genres', (req, res) => {
+router.get('/', (req, res) => {
   res.send(genres);
 });
 
 // GET METHOD FOR SINGLE COURSE
-router.get('/api/genres/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const movies = genres.find(genre => genre.id === parseInt(req.params.id));
   if (!movies) return res.status(400).send('This is invalid ID ');
   return res.send(movies);
 });
 
 // POST METHOD
-router.post('/api/genres', (req, res) => {
+router.post('/', (req, res) => {
   const { error } = validateGenre(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -34,7 +34,7 @@ router.post('/api/genres', (req, res) => {
 });
 
 // PUT METHOD
-router.put('/api/genres/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const genre = genres.find(genre => genre.id === parseInt(req.params.id));
   if (!genre) return res.status(400).send('This is invalid ID ');
 
@@ -46,7 +46,7 @@ router.put('/api/genres/:id', (req, res) => {
 });
 
 // DELETE METHOD
-router.delete('/api/genres/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const genre = genres.find(genre => genre.id === parseInt(req.params.id));
   if (!genre) return res.status(400).send('This is invalid ID ');
 
