@@ -23,8 +23,9 @@ app.get('/api/genres', (req, res) => {
 // GET METHOD FOR SINGLE COURSE
 
 app.get('/api/genres/:id', (req, res) => {
-  const movies = genres.find(genre => genre === parseInt(req.id));
-  if (!movies) return res.status(400).send('This is invalid ID brothers');
+  const movies = genres.find(genre => genre.id === parseInt(req.params.id));
+  if (!movies) return res.status(400).send('This is invalid ID ');
+  return res.send(movies);
 });
 
 const port = process.env.PORT || 3000;
