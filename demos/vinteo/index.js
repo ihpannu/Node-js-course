@@ -4,7 +4,7 @@ const home = require('./routes/home');
 
 const app = express();
 app.use(express.json());
-
+app.set('view engine', 'pug');
 app.use('/', home);
 
 const port = process.env.PORT || 3000;
