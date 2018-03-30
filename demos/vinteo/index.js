@@ -57,10 +57,8 @@ app.delete('/api/genres/:id', (req, res) => {
   const genre = genres.find(genre => genre.id === parseInt(req.params.id));
   if (!genre) return res.status(400).send('This is invalid ID ');
 
-  const { error } = validateGenre(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
-  genres.splice(genre, 1);
+  const index = genres.indexOf(genre);
+  genres.splice(index, 1);
   return res.send(genre);
 });
 
