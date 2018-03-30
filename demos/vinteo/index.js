@@ -15,10 +15,16 @@ app.get('/', (req, res) => {
   res.send('Home Page');
 });
 
-// GET METHOD
-
+// GET METHOD FOR ALL THE COURSES
 app.get('/api/genres', (req, res) => {
-  const movies = genres.find(genre => parseInt(req.id));
+  res.send(genres);
+});
+
+// GET METHOD FOR SINGLE COURSE
+
+app.get('/api/genres/:id', (req, res) => {
+  const movies = genres.find(genre => genre === parseInt(req.id));
+  if (!movies) return res.status(400).send('This is invalid ID brothers');
 });
 
 const port = process.env.PORT || 3000;
