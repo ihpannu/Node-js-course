@@ -2,6 +2,11 @@ console.log('Before');
 getUser(1, getRepositories);
 console.log('After');
 
+
+
+const promise = new Promise((resolve, reject) => {
+
+})
 function getRepositories(user) {
   getRepositories(user.githubUsername, getCommits);
 }
