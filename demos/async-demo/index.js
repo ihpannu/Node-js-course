@@ -8,6 +8,13 @@ console.log('Before');
 //   });
 // });
 
+function displayCommits() {
+  const user = await getUser(1);
+  const repos = await getRepositories(user.githubUsername);
+  const commits = await getCommits(repo[0]);
+  console.log(commits);
+}
+displayCommits();
 getUser(1)
   .then(user => getRepositories(user.githubUsername))
   .then(repo => getCommits(repos[0]))
