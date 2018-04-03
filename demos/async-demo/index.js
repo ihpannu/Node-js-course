@@ -7,7 +7,16 @@ console.log('Before');
 //     });
 //   });
 // });
-
+async function displayCommits() {
+  try {
+    const user = await getUser(1);
+    const repos = await getRepositories(user.githubUsername);
+    const commits = await getCommits(repo[0]);
+    console.log(commits);
+  } catch (err) {
+    console.log('Error', err.message);
+  }
+}
 displayCommits();
 // getUser(1)
 //   .then(user => getRepositories(user.githubUsername))
@@ -38,16 +47,8 @@ function getRepositories(username) {
   });
 }
 
-function getCommits(repos) {
+function getCommits(repo) {
   return new Promise((resolve, reject) => {
     getCommits(repos, displayCommits);
   });
-}
- function displayCommits() {
-  try {
-    const user = await getUser(1);
-  const repos = await getRepositories(user.githubUsername);
-  const commits = await getCommits(repo[0]);
-  console.log(commits);
-}
 }
