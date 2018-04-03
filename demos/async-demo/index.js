@@ -8,18 +8,12 @@ console.log('Before');
 //   });
 // });
 
-function displayCommits() {
-  const user = await getUser(1);
-  const repos = await getRepositories(user.githubUsername);
-  const commits = await getCommits(repo[0]);
-  console.log(commits);
-}
 displayCommits();
-getUser(1)
-  .then(user => getRepositories(user.githubUsername))
-  .then(repo => getCommits(repos[0]))
-  .then(commits => console.log('Commits', commits))
-  .catch(err => console.log('Error', err.message));
+// getUser(1)
+//   .then(user => getRepositories(user.githubUsername))
+//   .then(repo => getCommits(repos[0]))
+//   .then(commits => console.log('Commits', commits))
+//   .catch(err => console.log('Error', err.message));
 
 console.log('After');
 
@@ -48,4 +42,12 @@ function getCommits(repos) {
   return new Promise((resolve, reject) => {
     getCommits(repos, displayCommits);
   });
+}
+ function displayCommits() {
+  try {
+    const user = await getUser(1);
+  const repos = await getRepositories(user.githubUsername);
+  const commits = await getCommits(repo[0]);
+  console.log(commits);
+}
 }
