@@ -1,3 +1,15 @@
+const Logger = require('./eventClass')
+const logger = new Logger()
+
+// This Registers an event
+logger.on('messagelogger', (event) => {
+  console.log('Logging data from EventEmitter class: ', event)
+})
+logger.log()
+
+/*
+This is without class
+
 const EventEmitter = require('events')
 
 const logger = new EventEmitter()
@@ -12,3 +24,5 @@ logger.emit('logger', {
   id: 1,
   name: 'Logger'
 })
+
+*/
