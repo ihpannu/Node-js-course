@@ -1,0 +1,11 @@
+{
+  "name": "express-app",
+  "version": "1.0.0",
+  "description": "express app learn",
+  "main": "app.js",
+  "author": "Harman Pannu",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
