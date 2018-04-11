@@ -1,9 +1,22 @@
-const Logger = require("./logger");
-const logger = new Logger();
+const http = require("http");
 
-// Register a listener
-logger.on("messageLogged", event => {
-  console.log("listener called", event);
+const server = http.createServer((req, res) => {
+  if (req.url === "/") {
+    res.write("Working");
+    res.end();
+  }
+
+  if (req.url === "/api/courses") {
+    res.write(
+      JSON.stringify({
+        first: [1, 2, 3, 4],
+        second: [2, 5, 63, 44]
+      })
+    );
+    res.end();
+  }
 });
 
-logger.log("class");
+server.listen(3000);
+
+console.log("Listening on port 3000...");
