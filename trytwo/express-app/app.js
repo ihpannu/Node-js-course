@@ -2,6 +2,11 @@ const Joi = require("joi");
 const express = require("express");
 
 const app = express();
+
+// Imported custom MIDDLEWARE functions
+const logger = require("./logger");
+const auth = require("./auth");
+
 const courses = [
   {
     id: 1,
@@ -19,13 +24,11 @@ const courses = [
 
 // TO PARSE THE POST DATA // MIDDLEWARE
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // CUSTOM MIDDLEWARE FUNCTION
-
-app.use((req, res, next) => {
-  console.log("Logging.....");
-  next();
-});
+app.use(logger);
+app.use(auth);
 
 // GET METHOD
 app.get("/", (req, res) => {

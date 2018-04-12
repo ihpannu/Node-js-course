@@ -1,5 +1,9 @@
 const Joi = require("joi");
 const express = require("express");
+
+// IMPORTED JS MODULES
+const auth = require("./auth");
+
 const app = express();
 const users = [
   {
@@ -18,7 +22,7 @@ const users = [
 
 // THIS PARSE THE RESPONSE TO JSON
 app.use(express.json());
-
+app.use(auth);
 // HOMEPAGE
 app.get("/", (req, res) => {
   res.send("This is the home page");
