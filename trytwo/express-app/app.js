@@ -1,6 +1,7 @@
+const Joi = require("joi");
 const express = require("express");
-const app = express();
 
+const app = express();
 const courses = [
   {
     id: 1,
@@ -31,7 +32,7 @@ app.get("/api/courses", (req, res) => {
 app.get("/api/courses/:id", (req, res) => {
   const course = courses.find(c => c.id === parseInt(req.params.id));
   if (!course)
-    res.status(404).send("This course with the given id is not found");
+    return res.status(404).send("This course with the given id is not found");
   res.send(course);
 });
 
@@ -39,10 +40,9 @@ app.get("/api/courses/:id", (req, res) => {
 // ADDING NEW COURSE
 
 app.post("/api/courses", (req, res) => {
-  if (!req.body.name || req.body.name.length < 3) {
-    // 400 BAD REQUEST
-    res.status(400).send("Name is required and should be minimum 3 character");
-    return;
+  const { error } = validateCourse(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
   }
   const course = {
     id: courses.length + 1,
@@ -51,6 +51,48 @@ app.post("/api/courses", (req, res) => {
   courses.push(course);
   res.send(course);
 });
+
+// PUT METHOD
+app.put("/api/courses/:id", (req, res) => {
+  const course = courses.find(c => c.id === parseInt(req.params.id));
+  if (!course)
+    return res.status(404).send("This course with the given id is not found");
+
+  /* OBJECT DESTRUCTING
+    FROM THIS TO
+      const result = validateCourse(req.body);
+
+    THIS
+      const {error} = validateCourse(req.body)
+  */
+
+  const { error } = validateCourse(req.body);
+  if (error) {
+    return res.status(400).send(error.details[0].message);
+  }
+  course.name = req.body.name;
+  res.send(course);
+});
+
+app.delete("/api/courses/:id", (req, res) => {
+  const course = courses.find(c => c.id === parseInt(req.params.id));
+  if (!course)
+    return res.status(404).send("This course with the given id is not found");
+
+  // DELETE
+  const index = courses.indexOf(course);
+  courses.splice(index, 1);
+  res.send(course);
+});
+
+function validateCourse(course) {
+  const schema = {
+    name: Joi.string()
+      .min(3)
+      .required()
+  };
+  return Joi.validate(course, schema);
+}
 
 // Enviroment Variable
 const port = process.env.PORT || 3000;
