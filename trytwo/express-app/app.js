@@ -20,6 +20,13 @@ const courses = [
 // TO PARSE THE POST DATA // MIDDLEWARE
 app.use(express.json());
 
+// CUSTOM MIDDLEWARE FUNCTION
+
+app.use((req, res, next) => {
+  console.log("Logging.....");
+  next();
+});
+
 // GET METHOD
 app.get("/", (req, res) => {
   res.send("Hello World");
