@@ -3,6 +3,7 @@ const Joi = require("joi");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const express = require("express");
+const home = require("./routes/home");
 const courses = require("./routes/courses");
 const startupDebugger = require("debug")("app:startup");
 const dbDebugger = require("debug")("app:db");
@@ -13,8 +14,12 @@ const app = express();
 const logger = require("./logger");
 const auth = require("./auth");
 
-// TO PARSE THE POST DATA // MIDDLEWARE
+// VIEWS modules
+app.use("/", home);
 app.use("/api/courses", courses);
+
+// TO PARSE THE POST DATA // MIDDLEWARE
+
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -38,11 +43,6 @@ dbDebugger("Connected to the database");
 // CUSTOM MIDDLEWARE FUNCTION
 app.use(logger);
 app.use(auth);
-
-// GET METHOD
-app.get("/", (req, res) => {
-  res.render("index", { title: "Express Pug app" });
-});
 
 // Enviroment Variable
 const port = process.env.PORT || 3000;
