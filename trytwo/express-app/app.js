@@ -45,6 +45,7 @@ if (app.get("env") === "development") {
 }
 
 dbDebugger("Connected to the database");
+
 // CUSTOM MIDDLEWARE FUNCTION
 app.use(logger);
 app.use(auth);
