@@ -1,5 +1,10 @@
+const config = require("config");
 const Joi = require("joi");
+const helmet = require("helmet");
+const morgan = require("morgan");
 const express = require("express");
+const startupDebugger = require("debug")("app:startup");
+const dbDebugger = require("debug")("app:db");
 
 const app = express();
 
@@ -23,8 +28,21 @@ const courses = [
 ];
 
 // TO PARSE THE POST DATA // MIDDLEWARE
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+
+// config
+console.log(`Application name : ${config.get("name")}`);
+console.log(`Mail server : ${config.get("mail.host")}`);
+console.log(`Mail password : ${config.get("mail.password")}`);
+
+// CHECK WHICH ENV IS ENABLEd
+if (app.get("env") === "development") {
+  app.use(morgan("tiny"));
+  startupDebugger("Morgan Enabled...");
+}
 
 // CUSTOM MIDDLEWARE FUNCTION
 app.use(logger);
@@ -32,7 +50,7 @@ app.use(auth);
 
 // GET METHOD
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("This is courses express app");
 });
 
 app.get("/api/courses", (req, res) => {

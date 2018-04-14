@@ -1,12 +1,13 @@
 const Joi = require("joi");
+const morgan = require('morgan')
+const helmet = require('helmet')
 const express = require("express");
 
 // IMPORTED JS MODULES
 const auth = require("./auth");
 
 const app = express();
-const users = [
-  {
+const users = [{
     id: 1,
     name: "Sid"
   },
@@ -20,9 +21,17 @@ const users = [
   }
 ];
 
-// THIS PARSE THE RESPONSE TO JSON
+// THIS PARSE THE RESPONSE TO JSON // MIDDLEWARE functions
+app.use(helmet());
 app.use(express.json());
 app.use(auth);
+
+// CHECK WHICH ENV IS ENABLED
+if (app.get('env') === 'development') {
+  app.use(morgan('tiny'));
+  console.log('Morgan enabled...')
+}
+
 // HOMEPAGE
 app.get("/", (req, res) => {
   res.send("This is the home page");
@@ -46,7 +55,9 @@ app.get("/users/:id", (req, res) => {
 // TO POST A NEW USER
 app.post("/users", (req, res) => {
   // VALIDATE THE INPUT
-  const { error } = validateUser(req.body);
+  const {
+    error
+  } = validateUser(req.body);
   // CATCH THE ERROR AND DISPLAY
   if (error) {
     return res.status(400).send(error.details[0].message);
@@ -66,7 +77,9 @@ app.put("/users/:id", (req, res) => {
   if (!user)
     return res.status(404).send("Invalid user! This user does not exist...");
   // VALIDATE THE INPUT
-  const { error } = validateUser(req.body);
+  const {
+    error
+  } = validateUser(req.body);
   // CATCH THE ERROR AND DISPLAY
   if (error) {
     res.status(400).send(error.details[0].message);
