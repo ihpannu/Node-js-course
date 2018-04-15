@@ -3,16 +3,20 @@ const Joi = require("joi");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const express = require("express");
-const home = require("./routes/home");
-const courses = require("./routes/courses");
+
+// DEBUGGER IMPORTS
 const startupDebugger = require("debug")("app:startup");
 const dbDebugger = require("debug")("app:db");
+
+// VIEWS MODULES
+const home = require("./routes/home");
+const courses = require("./routes/courses");
 
 const app = express();
 
 // Imported custom MIDDLEWARE functions
-const logger = require("./logger");
-const auth = require("./auth");
+const logger = require("./middleware/logger");
+const auth = require("./middleware/auth");
 
 // VIEWS modules
 app.use("/", home);
@@ -23,6 +27,10 @@ app.use("/api/courses", courses);
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// CUSTOM MIDDLEWARE FUNCTION
+app.use(logger);
+app.use(auth);
+
 // app.use(express.static("public"));
 // USING PUG
 app.set("view engine", "pug");
@@ -39,10 +47,6 @@ if (app.get("env") === "development") {
 }
 
 dbDebugger("Connected to the database");
-
-// CUSTOM MIDDLEWARE FUNCTION
-app.use(logger);
-app.use(auth);
 
 // Enviroment Variable
 const port = process.env.PORT || 3000;
