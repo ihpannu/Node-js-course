@@ -98,5 +98,5 @@ function validateGenres(genre) {
   return Joi.validate(genre, schema);
 }
 
-const port = process.env.PORT || 3000;
-app.listen(3000, () => console.log(`listening on port ${port}`));
+const port = process.env.PORT || 8080;
+app.listen(8080, () => console.log(`listening on port ${port}`));
