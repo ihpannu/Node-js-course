@@ -19,3 +19,7 @@ function getUser(id, callback) {
     });
   }, 2000);
 }
+
+function hotUpdate(ok) {
+  console.log(ok);
+}
