@@ -1,25 +1,36 @@
-console.log("Before");
+// console.log("Before");
 
-getUser(1, user => {
-  console.log("User ", user);
-});
+// getUser(1, user => {
+//   console.log("User ", user);
+// });
 
-console.log("After");
+// console.log("After");
 
-function getUser(id, callback) {
+// function getUser(id, callback) {
+//   setTimeout(() => {
+//     console.log("Reading a user from database....");
+//     callback({
+//       id: id,
+//       githubUserName: "Harman",
+//       repos: {
+//         id: 1,
+//         name: "Vue js"
+//       }
+//     });
+//   }, 2000);
+// }
+
+// function hotUpdate(ok) {
+//   console.log(ok);
+// }
+
+const p = new Promise(function(resolve, reject) {
+  // Kick off some async work
   setTimeout(() => {
-    console.log("Reading a user from database....");
-    callback({
-      id: id,
-      githubUserName: "Harman",
-      repos: {
-        id: 1,
-        name: "Vue js"
-      }
-    });
+    // resolve(1);
+    reject(new Error("message"));
   }, 2000);
-}
-
-function hotUpdate(ok) {
-  console.log(ok);
-}
+});
+p
+  .then(result => console.log("Result", result))
+  .catch(error => console.error(error.message));
