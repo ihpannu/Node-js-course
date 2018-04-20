@@ -33,4 +33,4 @@ const p = new Promise(function(resolve, reject) {
 });
 p
   .then(result => console.log("Result", result))
-  .catch(error => console.error(error.message));
+  .catch(error => console.error("Error", error.message));
