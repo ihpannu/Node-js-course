@@ -1,0 +1,52 @@
+<!-- Make dir for mongo fb -  --> sudo mkdir -p /data/db
+
+<!-- Give higher permission to the directory --> sudo chown -R `id -un` /data/db
+
+<!-- Make the connection --> mongod
+
+<!-- To connect to mongodb use   -->
+1) const mongoose = require('mongoose')
+2) mongoose.connect('mongodb://localhost/playground')
+  .then(() => console.log("Connected to mongodb...."))
+  .catch(err => console.error('Could not connect to Mongodb...', err))
+
+
+# Schema Types
+
+String, Number, Date, Buffer, Bollean, ObjectID, Array
+
+
+# First Create a Schema
+# Example Below
+const courseSchema = new mongoose.Schema({
+  name: String,
+  author: String,
+  tags: [
+    String, String
+  ],
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  isPublished: Boolean
+});
+
+# Then create a class
+const Course = mongoose.model('Course', courseSchema); // Class
+
+# And last create a schema object using async function
+
+async function createCourse() {
+  const course = new Course({
+    name: 'Node Js Course',
+    author: 'Mosh',
+    tags: [
+      'Javascript', 'Node'
+    ],
+    isPublished: true
+  });
+
+  const result = await course.save()
+  console.log(result);
+}
+createCourse() # This will create a database everytime the function gets called

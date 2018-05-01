@@ -12,9 +12,7 @@
 
 getCustomer(1)
   .then(customer => console.log(customer))
-  .then(customer => if (customer.isGold) {
-
-  });
+  .then();
 
 function getCustomer(id) {
   return new Promise((resolve, reject) => {
